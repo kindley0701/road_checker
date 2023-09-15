@@ -1,0 +1,20 @@
+<h2>国道一覧</h2>
+<table>
+  <thead>
+    <tr>
+      <th>道路種別</th>
+      <th>路線</th>
+      <th>キロポスト数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @roads.each do |road| %>
+      <tr>
+        <td><%= road.category %></td>
+        <td><%= road.number %></td>
+        <td><%= road.kilo_posts.count %></td>
+        <td><%= link_to "詳細へ", admin_road_path(road.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
