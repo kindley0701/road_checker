@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  root to: 'admin/roads#new'
+  root to: 'admin/roads#index'
 
   namespace :admin do
     resources :roads

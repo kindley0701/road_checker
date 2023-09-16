@@ -58,4 +58,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
+#.envで管理するため
+gem 'dotenv-rails'
+
+#csvを扱うため
 gem 'roo', "~> 2.10.0"
+
+gem 'enum_help'

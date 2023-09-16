@@ -1,2 +1,44 @@
-<h1>Admin::Roads#show</h1>
-<p>Find me in app/views/admin/roads/show.html.erb</p>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&callback=initMap">
+</script>
+
+<table>
+  <tbody>
+    <tr>
+      <td><%= @road.category %></td>
+      <td>No.<%= @road.number %></td>
+      <td><%= @kilo_posts.count %>本</td>
+    </tr>
+  </tbody>
+</table>
+<div id="map"></div>
+
+<script>
+  let map;
+  var marker;
+
+  function initMap(){
+    map = new google.maps.Map(document.getElementById("map"),{
+      center: {lat: 35, lng: 135},
+      zoom: 5
+    });
+    <% @kilo_posts.each do |kilo_post| %>
+      var position = {lat: <%= kilo_post.latitude %>, lng: <%= kilo_post.longitude %>};
+      setMarker(map, position);
+    <% end %>
+  };
+
+  function setMarker(map, position) {
+    marker = new google.maps.Marker({
+      map: map,
+      position: position
+    });
+  };
+</script>
+
+<style>
+  #map {
+    width: 50%;
+    height: 400px;
+  }
+</style>
