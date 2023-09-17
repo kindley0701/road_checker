@@ -1,24 +1,7 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 国道チェッカー(作成中)
+日本国道の走破を目指すチェッカーアプリです．
+## 機能
+### ドライブ日記機能
+CSV形式の座標データをアップロードすることで移動履歴の日記を作成できます．
+### 国道地図機能
+国道の地図を閲覧することができます．
