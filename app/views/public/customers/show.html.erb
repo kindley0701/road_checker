@@ -1,0 +1,17 @@
+<%= @customer.id %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th>日記</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @diaries.each do |diary| %>
+      <tr>
+        <td><%= diary.date %></td>
+        <td><%= link_to '日記へ', drive_diary_path(diary.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
