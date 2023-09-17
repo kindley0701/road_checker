@@ -1,0 +1,66 @@
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&callback=initMap">
+</script>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div id="map"></div>
+    </div>
+    <div class="col-6">
+      <table class="table">
+        <tr>
+          <th>日付</th>
+          <td><%= @diary.date %></td>
+        </tr>
+        <tr>
+          <th>プロット数</th>
+          <td><%= @coords.count %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  let map;
+  var marker;
+  var bounds;
+
+  function initMap(){
+    map = new google.maps.Map(document.getElementById("map"),{
+      center: {lat: 35, lng: 135},
+      zoom: 2
+    });
+    bounds = new google.maps.LatLngBounds();
+    <% @coords.each do |coord| %>
+      var position = {lat: <%= coord.latitude %>, lng: <%= coord.longitude %>};
+      setMarker(map, position);
+      bounds.extend(position);
+    <% end %>
+    map.fitBounds(bounds,10);
+  };
+
+  function setMarker(map, position) {
+    marker = new google.maps.Marker({
+      map: map,
+      position: position,
+      icon: { //マーカーを変更するオプション
+        path: google.maps.SymbolPath.CIRCLE, // シンボルの形状を円に設定
+        fillColor: 'red', // 塗りつぶし色
+        fillOpacity: 1, // 塗りつぶしの不透明度
+        scale: 2, // シンボルのサイズを調整
+        strokeColor: 'red', // 境界線の色
+        strokeWeight: 1 // 境界線の太さ
+      }
+    });
+  };
+</script>
+
+<style>
+  #map {
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+  }
+</style>

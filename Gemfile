@@ -58,4 +58,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
+#.envで管理するため
+gem 'dotenv-rails'
+
 gem 'roo', "~> 2.10.0"

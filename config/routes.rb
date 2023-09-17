@@ -12,7 +12,11 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  root to: 'admin/roads#new'
+  root to: 'public/homes#top'
+
+  scope module: :public do
+    resources :drive_diaries
+  end
 
   namespace :admin do
     resources :roads
