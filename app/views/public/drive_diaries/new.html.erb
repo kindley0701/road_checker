@@ -1,0 +1,6 @@
+ドライブ日記の投稿
+<%= form_with model: @diary do |f| %>
+  <%= f.file_field :file %>
+  <%= f.date_field :date %>
+  <%= f.submit '投稿する' %>
+<% end %>

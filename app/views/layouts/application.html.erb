@@ -14,6 +14,13 @@
     <header>
       <%= link_to '国道登録', new_admin_road_path %>
       <%= link_to '国道一覧', admin_roads_path %>
+      <% if customer_signed_in? %>
+        <%= link_to '日記投稿', new_drive_diary_path %>
+        <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %>
+      <% else %>
+        <%= link_to '会員登録', new_customer_registration_path %>
+        <%= link_to 'ログイン', new_customer_session_path %>
+      <% end %>
     </header>
     <%= yield %>
   </body>
