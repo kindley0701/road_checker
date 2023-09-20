@@ -7,6 +7,7 @@
       <div id="map"></div>
     </div>
     <div class="col-6">
+      <%= link_to '削除', drive_diary_path(@diary.id), method: :delete, class: 'btn btn-danger' %>
       <table class="table">
         <tr>
           <th>日付</th>

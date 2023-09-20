@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2023_09_17_093955) do
 
   create_table "drive_diaries", force: :cascade do |t|
     t.integer "customer_id"
-    t.datetime "date"
+    t.date "date"
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
