@@ -1,4 +1,6 @@
 <%= form_with url: admin_roads_path do |f| %>
-  <%= f.file_field :file %>
+  <div class='choice_box'>
+    <%= f.file_field :file, id: 'post' %>
+  </div>
   <%= f.submit 'インポート' %>
 <% end %>
