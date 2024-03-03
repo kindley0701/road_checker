@@ -65,3 +65,6 @@ gem 'dotenv-rails'
 gem 'roo', "~> 2.10.0"
 
 gem 'enum_help'
+
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"

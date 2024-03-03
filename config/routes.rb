@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   # URL /customers/sign_in ...
   devise_for :customers, controllers: {
     registrations: "public/registrations",
-    sessions: 'public/sessions'
+    sessions: 'public/sessions',
+    omniauth_callbacks: 'public/omniauth_callbacks' #SNS認証用に追記
   }
 
   # 管理者用
