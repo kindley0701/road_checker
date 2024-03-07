@@ -1,0 +1,47 @@
+<!--ボタンは一旦画像にしている-->
+<%= link_to omniauth_authorize_path(resource_name, provider), method: :post, data: { turbo: false } do %>
+  <%= image_tag 'google_login.PNG', size: '182x38' %>
+<% end %>
+
+<%#= omniauth_authorize_path(resource_name, provider) %>
+<%#= resource_name %>
+<%#= provider %>
+
+<!--<div>-->
+<!--  <script src="https://accounts.google.com/gsi/client" async defer></script>-->
+  <!-- Googleログインボタンの表示 ここから追加 -->
+<!--  <div -->
+<!--    id="g_id_onload"-->
+<!--    data-client_id="262122563978-tlc1engsmt3t2mkt1urd57gmveae5ogh.apps.googleusercontent.com"-->
+<!--    data-login_uri="<%#= omniauth_authorize_url(resource_name, provider) %>"-->
+<!--    data-auto_prompt="false"-->
+<!--    class="g_id_signin"-->
+<!--    data-type="standard"-->
+<!--    data-size="large"-->
+<!--    data-theme="outline"-->
+<!--    data-text="sign_in_with"-->
+<!--    data-shape="rectangular"-->
+<!--    data-logo_alignment="center">-->
+<!--  </div>-->
+  
+  
+  <!-- ここまで追加 -->
+<!--</div>-->
+
+<!--  <div id="g_id_onload"-->
+<!--     data-client_id="262122563978-tlc1engsmt3t2mkt1urd57gmveae5ogh.apps.googleusercontent.com"-->
+<!--     data-context="signin"-->
+<!--     data-ux_mode="redirect"-->
+<!--     data-login_uri="https://db2858554d474b21927fd65d0d641f5f.vfs.cloud9.ap-northeast-1.amazonaws.com/customers/auth/google_oauth2"-->
+<!--     data-auto_prompt="false">-->
+<!--</div>-->
+
+<!--<div class="g_id_signin"-->
+<!--     data-type="standard"-->
+<!--     data-shape="rectangular"-->
+<!--     data-theme="outline"-->
+<!--     data-text="signin_with"-->
+<!--     data-size="large"-->
+<!--     data-locale="ja"-->
+<!--     data-logo_alignment="left">-->
+<!--</div>-->

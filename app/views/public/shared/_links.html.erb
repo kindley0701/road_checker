@@ -18,8 +18,21 @@
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
 
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
+<div class="w-25 mx-auto">
+  <%- if devise_mapping.omniauthable? %>
+    <p class="mt-2">あるいは</p>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <% if provider.to_s == 'google_oauth2' %><!--provider.class = symbol-->
+      
+        <%= render 'public/shared/google_login_btn', resource_name: resource_name, provider: provider %>
+      
+      <% else %>
+      
+        <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
+      
+        
+      <% end %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+  
