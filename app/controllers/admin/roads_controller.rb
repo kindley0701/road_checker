@@ -43,6 +43,9 @@ class Admin::RoadsController < ApplicationController
     @road = Road.find(params[:id])
     @kilo_posts = @road.kilo_posts
   end
+  
+  def edit
+  end
 
   private
 

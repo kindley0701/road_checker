@@ -1,0 +1,87 @@
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&callback=initMap">
+</script>
+
+<script>
+  let map;
+  var marker;
+  var bounds;
+
+  function initMap(){
+    map = new google.maps.Map(document.getElementById("map"),{
+      center: {lat: 35, lng: 135},
+      zoom: 2
+    });
+    bounds = new google.maps.LatLngBounds();
+    var path = [];
+    var count = 0;
+    <% @kilo_posts.each do |kilo_post| %>
+      // console.log(path)
+      // if (count % 5 == 0){
+        latlng = "<%= kilo_post.latitude %>"+ "," +"<%= kilo_post.longitude %>";
+        path.push(latlng);
+      // }
+      // count += 1;
+      // setMarker(map, path);
+    <% end %>
+    path = path.join('|');
+    // console.log(path);
+    requestSnapToRoads(path);
+  };
+
+  function requestSnapToRoads(path){
+    console.log(path)
+  	$.get("https://roads.googleapis.com/v1/snapToRoads", {
+  		interpolate: true,	// 補完を行うかどうか
+  		key: "<%= ENV['GOOGLE_MAPS_API_KEY'] %>",
+  		path: path
+  	}, function(data){
+  	  console.log(data)
+  		processResponse(data);
+  	});
+  };
+
+  // レスポンス処理
+  function processResponse(data){
+  	var snappedCoordinates = [];
+  	for(var i = 0; i < data.snappedPoints.length; i++){
+  		// スナップされた地点の取得
+  		var position = new google.maps.LatLng(
+  			data.snappedPoints[i].location.latitude,
+  			data.snappedPoints[i].location.longitude);
+  		snappedCoordinates.push(position);
+  
+  		// スナップされた地点へのマーカー表示
+  		var marker = new google.maps.Marker({
+  			position: position,
+  			map: map
+  		});
+      bounds.extend(position);
+  		// 補完された地点(元の位置情報には無かった地点)については、
+  		// マーカーラベルを"x"として半透明で表示する
+  		if("originalIndex" in data.snappedPoints[i]){
+  			marker.setLabel((data.snappedPoints[i].originalIndex+1)+"");
+  		} else {
+  			marker.setLabel("x");
+  			marker.setOpacity(0.5);
+  		}
+  	}
+    map.fitBounds(bounds,10);
+  	// スナップされた地点をもとにPolylineを表示
+  	var polyline = new google.maps.Polyline({
+  		path: snappedCoordinates,
+  		strokeWeight: 3
+  	});
+  	polyline.setMap(map);
+  }
+</script>
+
+<style>
+  #map {
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+  }
+</style>
+
+<div id="map"></div>

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :drive_diaries
     resources :customers
+    resources :roads
   end
 
   namespace :admin do
