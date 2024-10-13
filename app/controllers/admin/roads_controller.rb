@@ -45,6 +45,9 @@ class Admin::RoadsController < ApplicationController
   end
   
   def edit
+    @road = Road.find(params[:id])
+    @kilo_posts = @road.kilo_posts.limit(30)
+    @count = 1
   end
 
   private

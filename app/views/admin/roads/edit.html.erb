@@ -1,0 +1,81 @@
+kilo_postsの並び替え
+
+
+案
+・点の数が多いから直線距離で計算しても良いかも
+
+①：全ての点を取り出し，配列Aに入れる．
+②：1点を取り出す．
+③：取り出した1点を配列Aから削除し，配列Bに入れる．
+④：取り出した1点と配列A内のすべての点を比較し，距離を算出する．
+⑤：最小距離となる点を求め，その1点を新たに取り出す．
+⑥：配列Aが空になるまで③～⑤を繰り返す．
+⑦：配列Bに入った点を前から番号を振る．
+
+
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&callback=initMap">
+</script>
+<div class='container'>
+  <div class='row'>
+    <div class='col-12' id="map"></div>
+    <div class='col-5'>
+      <table>
+        <% @kilo_posts.each do |kilo_post| %>
+          <tr>
+            <td><%= @count %></td>
+            <td>(<%= kilo_post.latitude %></td><td>,</td><td><%= kilo_post.longitude %>)</td>
+          </tr>
+          <% @count += 1 %>
+        <% end %>
+      </table>
+    </div>
+    
+  </div>
+</div>
+
+<script>
+  let map;
+  var marker;
+  var bounds;
+
+  function initMap(){
+    map = new google.maps.Map(document.getElementById("map"),{
+      center: {lat: 35, lng: 135},
+      zoom: 2
+    });
+    bounds = new google.maps.LatLngBounds();
+    var count = 1;
+    <% @kilo_posts.each do |kilo_post| %>
+      var position = {lat: <%= kilo_post.latitude %>, lng: <%= kilo_post.longitude %>};
+      setMarker(map, position, count);
+      bounds.extend(position);
+      count += 1;
+    <% end %>
+    map.fitBounds(bounds,10);
+  };
+
+  function setMarker(map, position, count) {
+    marker = new google.maps.Marker({
+      map: map,
+      position: position,
+      // icon: { //マーカーを変更するオプション
+      //   path: google.maps.SymbolPath.CIRCLE, // シンボルの形状を円に設定
+      //   fillColor: 'red', // 塗りつぶし色
+      //   fillOpacity: 1, // 塗りつぶしの不透明度
+      //   scale: 2, // シンボルのサイズを調整
+      //   strokeColor: 'red', // 境界線の色
+      //   strokeWeight: 1 // 境界線の太さ
+      // }
+    });
+    marker.setLabel(String(count));
+  };
+</script>
+
+<style>
+  #map {
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+  }
+</style>
